@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Traffic Management Model</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+      }
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-height: 80%;
+        overflow-y: auto;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      h2,
+      h3 {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+        margin-top: 0;
+      }
+      p,
+      ul {
+        margin-left: 20px;
+      }
+      ul {
+        list-style-type: disc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Traffic Management Model</h1>
+    <div id="elements">
+      <!-- Visualization and controls will be added here by Mesa -->
+    </div>
+    <button onclick="openModal()">About</button>
+
+    <!-- The Modal -->
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div id="aboutText">
+          <!-- About text will be dynamically added here by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript to handle the About modal
+      function openModal() {
+        fetch("/about")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("aboutText").innerHTML = data;
+            document.getElementById("aboutModal").style.display = "block";
+          });
+      }
+
+      function closeModal() {
+        document.getElementById("aboutModal").style.display = "none";
+      }
+
+      // Close the modal when clicking outside of it
+      window.onclick = function (event) {
+        if (event.target == document.getElementById("aboutModal")) {
+          document.getElementById("aboutModal").style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
